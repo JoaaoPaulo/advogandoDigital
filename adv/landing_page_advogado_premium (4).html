@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. Carlos Mendes | Advogado Trabalhista</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#060e1a; --ink2:#0b1929; --ink3:#0f2037;
+  --gold:#c9983c; --gold-hi:#e8b455; --gold-lo:rgba(201,152,60,.12);
+  --gold-bd:rgba(201,152,60,.28);
+  --cream:#f3efe4; --cream2:#e9e2d0;
+  --white:#fff;
+  --muted:rgba(255,255,255,.44); --muted2:rgba(255,255,255,.66);
+  --gray:#68717d;
+  --r:6px; --rx:12px;
+  --ease:cubic-bezier(.25,.46,.45,.94);
+}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+
+/* PROGRESS */
+#prog{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-hi));z-index:9999;pointer-events:none;transition:width .08s linear}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:600;height:76px;padding:0 5%;display:flex;flex-direction:row;align-items:center;background:rgba(6,14,26,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(201,152,60,.15)}
+.logo{font-family:'Cormorant Garamond',serif;color:var(--white);font-size:1.2rem;font-weight:600;letter-spacing:.05em;margin-right:auto}
+.logo em{color:var(--gold);font-style:normal;font-weight:300;margin:0 .2rem}
+nav ul{list-style:none;display:flex;flex-direction:row;align-items:center;gap:2.5rem}
+nav ul a{color:rgba(255,255,255,.62);font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;font-weight:400;transition:color .2s;position:relative;padding-bottom:3px}
+nav ul a:not(.ncta)::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--gold);transition:width .3s var(--ease)}
+nav ul a:not(.ncta):hover{color:var(--white)}
+nav ul a:not(.ncta):hover::after{width:100%}
+.ncta{border:1px solid var(--gold-bd)!important;color:var(--gold)!important;padding:.46rem 1.3rem;border-radius:var(--r);transition:all .25s!important}
+.ncta:hover{background:var(--gold)!important;color:var(--ink)!important}
+.ham{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.ham span{width:22px;height:1.5px;background:rgba(255,255,255,.8);display:block;transition:all .3s var(--ease)}
+.ham.x span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.ham.x span:nth-child(2){opacity:0}
+.ham.x span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.mob{display:none;position:fixed;top:76px;inset-x:0;background:rgba(6,14,26,.97);backdrop-filter:blur(20px);padding:2rem 6% 3rem;flex-direction:column;gap:0;border-top:1px solid var(--gold-bd);z-index:599}
+.mob.on{display:flex}
+.mob a{color:rgba(255,255,255,.72);font-size:1.1rem;font-weight:300;padding:1rem 0;border-bottom:1px solid rgba(255,255,255,.06);letter-spacing:.03em;transition:color .2s}
+.mob a:last-child{border:none;color:var(--gold);font-weight:500;margin-top:.4rem}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   HERO — CINEMATIC SPLIT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;background:var(--ink);position:relative;overflow:hidden}
+
+/* LEFT — content */
+.hl{display:flex;align-items:center;padding:130px 5% 80px 6%;position:relative;z-index:2}
+/* dot texture */
+.hl::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(201,152,60,.07) 1px,transparent 1px);background-size:30px 30px;mask-image:linear-gradient(to right,black 50%,transparent 100%);pointer-events:none}
+/* vertical divider */
+.hl::after{content:'';position:absolute;right:0;top:18%;height:64%;width:1px;background:linear-gradient(to bottom,transparent,var(--gold-bd),transparent)}
+
+/* RIGHT — photo */
+.hr{position:relative;overflow:hidden}
+.hphoto{
+  position:absolute;inset:0;
+  background:url('https://images.unsplash.com/photo-1560250097-0b93528c311a?w=1000&q=88') center 10%/cover no-repeat;
+  filter:grayscale(20%) contrast(1.1) brightness(.88);
+  transform:scale(1.06);
+  animation:zoomout 1.4s .2s var(--ease) forwards;
+}
+@keyframes zoomout{to{transform:scale(1)}}
+/* Cinematic overlays */
+.hphoto::before{
+  content:'';position:absolute;inset:0;
+  background:
+    linear-gradient(to right,var(--ink) 0%,rgba(6,14,26,.6) 22%,rgba(6,14,26,.08) 65%,transparent 100%),
+    linear-gradient(to top,rgba(6,14,26,.75) 0%,rgba(6,14,26,.15) 30%,transparent 60%),
+    linear-gradient(150deg,rgba(201,152,60,.1) 0%,transparent 45%);
+}
+/* Gold scan line shimmer */
+.hphoto::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to bottom,transparent 40%,rgba(201,152,60,.04) 50%,transparent 60%);
+  animation:scan 4s ease-in-out infinite;
+}
+@keyframes scan{0%,100%{transform:translateY(-30%)}50%{transform:translateY(30%)}}
+
+/* Floating glass cards on photo */
+.hcard{
+  position:absolute;z-index:4;
+  background:rgba(6,14,26,.7);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border:1px solid rgba(201,152,60,.22);border-radius:var(--rx);
+  padding:1.1rem 1.5rem;
+  box-shadow:0 20px 60px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.05);
+  animation:floatup .8s var(--ease) both;
+}
+@keyframes floatup{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.hc1{bottom:22%;left:-5px;min-width:175px;animation-delay:.6s}
+.hc2{top:20%;right:4%;min-width:160px;animation-delay:.8s}
+.hc3{bottom:10%;right:6%;min-width:155px;animation-delay:1s}
+.hcard-lbl{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.4rem}
+.hcard-val{font-family:'Cormorant Garamond',serif;font-size:2.1rem;font-weight:700;color:var(--white);line-height:1;display:block}
+.hcard-sub{font-size:.7rem;color:var(--muted);display:block;margin-top:.35rem;line-height:1.45}
+
+/* Corner brackets */
+.hbracket{position:absolute;z-index:5;width:48px;height:48px;border-style:solid;border-color:rgba(201,152,60,.38)}
+.hbl{top:28px;left:28px;border-width:1.5px 0 0 1.5px}
+.hbr{bottom:70px;right:28px;border-width:0 1.5px 1.5px 0}
+
+/* Hero copy */
+.hcopy{position:relative;z-index:2;max-width:540px}
+.pill{display:inline-flex;align-items:center;gap:.55rem;background:rgba(201,152,60,.1);border:1px solid rgba(201,152,60,.28);color:var(--gold);font-size:.67rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;padding:.42rem 1rem;border-radius:40px;margin-bottom:2rem}
+.pdot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:blink 2.2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.6)}}
+.hero h1{font-family:'Cormorant Garamond',serif;color:var(--white);font-size:clamp(2.6rem,3.8vw,4rem);line-height:1.07;font-weight:600;letter-spacing:-.01em;margin-bottom:1.6rem}
+.hero h1 i{color:var(--gold);font-style:italic;font-weight:300}
+.hlead{color:rgba(255,255,255,.56);font-size:.98rem;line-height:1.85;max-width:450px;margin-bottom:2.8rem;font-weight:300}
+.ctas{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.btng{display:inline-flex;align-items:center;gap:.5rem;background:var(--gold);color:var(--ink);padding:.9rem 2rem;border-radius:var(--r);font-size:.8rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;position:relative;overflow:hidden;transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .2s}
+.btng::before{content:'';position:absolute;top:0;left:-100%;width:55%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);transition:left .5s var(--ease)}
+.btng:hover::before{left:160%}
+.btng:hover{background:var(--gold-hi);transform:translateY(-2px);box-shadow:0 16px 48px rgba(201,152,60,.4)}
+.btnl{display:inline-flex;align-items:center;gap:.5rem;border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.68);padding:.9rem 1.8rem;border-radius:var(--r);font-size:.8rem;font-weight:300;letter-spacing:.07em;text-transform:uppercase;transition:all .3s var(--ease)}
+.btnl:hover{border-color:var(--gold-bd);color:var(--gold-hi)}
+
+/* Stats */
+.hstats{display:flex;gap:3rem;margin-top:3.5rem;padding-top:2.8rem;border-top:1px solid rgba(255,255,255,.08)}
+.hs-num{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:700;color:var(--gold);display:block;line-height:1;margin-bottom:.3rem}
+.hs-lbl{font-size:.67rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.36)}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   TRUST BAR
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.trust{background:var(--cream);display:flex;justify-content:center;align-items:center;flex-wrap:wrap;border-top:1px solid var(--cream2);border-bottom:1px solid var(--cream2)}
+.ti{display:flex;align-items:center;gap:.6rem;font-size:.76rem;color:var(--ink2);font-weight:400;letter-spacing:.02em;padding:1.2rem 2.5rem;border-right:1px solid var(--cream2)}
+.ti:last-child{border-right:none}
+.tic{font-size:.9rem;opacity:.6}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SHARED
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+section{padding:7rem 5%}
+.eye{display:inline-flex;align-items:center;gap:.7rem;font-size:.67rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:.9rem}
+.eye::before{content:'';width:28px;height:1px;background:var(--gold)}
+.shtitle{font-family:'Cormorant Garamond',serif;font-size:clamp(1.9rem,3vw,2.8rem);line-height:1.12;font-weight:600;letter-spacing:-.01em}
+
+/* Reveal */
+.r{opacity:0;transform:translateY(30px);transition:opacity .75s var(--ease),transform .75s var(--ease)}
+.r.v{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+.d4{transition-delay:.32s}.d5{transition-delay:.4s}.d6{transition-delay:.48s}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   ABOUT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.about{background:var(--cream);display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center}
+.avis{position:relative;padding-bottom:28px;padding-right:28px}
+
+/* Photo */
+.aimg{position:relative;z-index:1;border-radius:var(--rx);overflow:hidden;box-shadow:0 40px 100px rgba(6,14,26,.18)}
+.aimg img{width:100%;display:block;filter:grayscale(12%) contrast(1.06) brightness(.96);transition:filter .6s,transform .7s var(--ease)}
+.aimg:hover img{filter:grayscale(0%) contrast(1.08) brightness(1);transform:scale(1.02)}
+/* Dark gradient at bottom */
+.aimg::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(6,14,26,.5) 0%,transparent 40%);pointer-events:none}
+/* Gold name overlay */
+.aimg-name{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:1.5rem 1.8rem;background:linear-gradient(to top,rgba(6,14,26,.85) 0%,transparent 100%)}
+.aimg-name strong{display:block;font-family:'Cormorant Garamond',serif;color:var(--white);font-size:1.3rem;font-weight:600;line-height:1.2}
+.aimg-name span{font-size:.72rem;color:var(--gold);letter-spacing:.1em;text-transform:uppercase}
+
+/* Gold frame */
+.aframe{position:absolute;inset:-12px;border:1px solid rgba(201,152,60,.2);border-radius:calc(var(--rx)+4px);z-index:0;transition:all .4s var(--ease)}
+.avis:hover .aframe{inset:-18px;border-color:rgba(201,152,60,.38)}
+
+/* Dot grid */
+.adots{position:absolute;top:-24px;left:-24px;width:100px;height:100px;z-index:0;background:radial-gradient(circle,rgba(201,152,60,.3) 1.2px,transparent 1.2px);background-size:12px 12px;opacity:.65}
+
+/* OAB badge floating */
+.aoab{position:absolute;bottom:0;right:0;z-index:3;background:var(--ink);border-radius:var(--rx);border:1px solid rgba(201,152,60,.22);padding:1rem 1.4rem;box-shadow:0 24px 60px rgba(6,14,26,.35);display:flex;align-items:center;gap:.75rem}
+.aoab-ico{font-size:1.4rem}
+.aoab-txt strong{display:block;color:var(--gold);font-size:.8rem;font-weight:600;letter-spacing:.04em;margin-bottom:.15rem}
+.aoab-txt span{font-size:.7rem;color:rgba(255,255,255,.42)}
+
+/* Years badge */
+.abadge{position:absolute;top:-16px;right:12px;z-index:3;background:var(--gold);color:var(--ink);border-radius:var(--rx);padding:.75rem 1rem;text-align:center;box-shadow:0 12px 36px rgba(201,152,60,.38)}
+.abadge strong{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;display:block;line-height:1}
+.abadge span{font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;font-weight:600;opacity:.8}
+
+/* About copy */
+.acopy .shtitle{margin-bottom:1.2rem}
+.abar{width:46px;height:2px;background:linear-gradient(90deg,var(--gold),transparent);margin:1.6rem 0}
+.acopy p{color:var(--gray);line-height:1.9;font-size:.93rem;margin-bottom:1rem;font-weight:300}
+.alist{list-style:none;display:flex;flex-direction:column;gap:.6rem;margin-top:.5rem}
+.alist li{display:flex;align-items:center;gap:.75rem;font-size:.84rem;color:var(--ink2);font-weight:400}
+.alist li::before{content:'✓';width:18px;height:18px;border-radius:50%;background:rgba(201,152,60,.1);border:1px solid rgba(201,152,60,.3);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:.7rem;font-weight:700;flex-shrink:0}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   AREAS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.areas{background:var(--ink);position:relative;overflow:hidden}
+.areas::before{content:'';position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(201,152,60,.07),transparent 65%);right:-200px;top:-180px;pointer-events:none}
+.areas::after{content:'';position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(201,152,60,.05),transparent 65%);left:-100px;bottom:-120px;pointer-events:none}
+.ahd{text-align:center;margin-bottom:4.5rem}
+.ahd .eye{justify-content:center}
+.ahd .shtitle{color:var(--white)}
+.ahd p{color:var(--muted);margin-top:.7rem;font-size:.9rem;font-weight:300}
+.agrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:rgba(255,255,255,.05);border-radius:var(--rx);overflow:hidden}
+.ac{background:var(--ink2);padding:2.4rem 2rem;position:relative;overflow:hidden;transition:background .35s,transform .3s var(--ease);cursor:default}
+.ac::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,152,60,.07),transparent 55%);opacity:0;transition:opacity .35s}
+.ac::after{content:'';position:absolute;left:0;top:0;width:3px;height:0;background:linear-gradient(to bottom,var(--gold),var(--gold-hi));transition:height .4s var(--ease)}
+.ac:hover{background:rgba(15,32,55,1);transform:translateY(-3px)}
+.ac:hover::before{opacity:1}
+.ac:hover::after{height:100%}
+.acnum{font-family:'Cormorant Garamond',serif;font-size:.68rem;letter-spacing:.25em;color:rgba(201,152,60,.32);font-weight:400;margin-bottom:1.3rem;display:block;text-transform:uppercase}
+.acico{width:44px;height:44px;background:var(--gold-lo);border:1px solid var(--gold-bd);border-radius:var(--r);display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:1.4rem;transition:all .3s}
+.ac:hover .acico{background:rgba(201,152,60,.2);border-color:rgba(201,152,60,.5)}
+.ac h3{font-family:'Cormorant Garamond',serif;color:var(--white);font-size:1.18rem;font-weight:600;line-height:1.22;margin-bottom:.7rem}
+.ac p{color:var(--muted);font-size:.83rem;line-height:1.78;font-weight:300}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   TESTIMONIALS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.depo{background:var(--white);position:relative}
+.depo::before{content:'';position:absolute;top:0;left:5%;right:5%;height:1px;background:linear-gradient(90deg,transparent,var(--cream2),transparent)}
+.dhd{text-align:center;margin-bottom:4rem}
+.dhd .eye{justify-content:center}
+.dhd p{color:var(--gray);margin-top:.6rem;font-size:.88rem;font-weight:300}
+.dgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.dc{background:var(--cream);border-radius:var(--rx);padding:2.3rem 2rem;position:relative;overflow:hidden;border:1px solid var(--cream2);transition:all .35s var(--ease)}
+.dc:hover{transform:translateY(-6px);box-shadow:0 28px 70px rgba(6,14,26,.1);border-color:rgba(201,152,60,.2)}
+.dc::before{content:'\201C';font-family:'Cormorant Garamond',serif;position:absolute;top:-14px;left:16px;font-size:8rem;line-height:1;color:var(--gold);opacity:.07;pointer-events:none;transition:opacity .3s}
+.dc:hover::before{opacity:.14}
+.stars{display:flex;gap:3px;margin-bottom:1.3rem}
+.st{width:13px;height:13px;background:var(--gold);clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
+.dtxt{color:var(--ink2);font-size:.88rem;line-height:1.88;font-style:italic;margin-bottom:1.75rem;font-weight:300}
+.daut{display:flex;align-items:center;gap:.85rem}
+.ava{width:42px;height:42px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--ink),var(--ink3));border:2px solid rgba(201,152,60,.3);display:flex;align-items:center;justify-content:center;color:var(--gold);font-weight:600;font-size:.8rem;letter-spacing:.04em}
+.aname{display:block;font-size:.84rem;font-weight:600;color:var(--ink);margin-bottom:.15rem}
+.arole{font-size:.74rem;color:var(--gray)}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   CONTACT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.contato{background:var(--ink);position:relative;overflow:hidden;text-align:center}
+.contato::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(201,152,60,.04) 1px,transparent 1px);background-size:36px 36px}
+.cglow{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:800px;height:400px;border-radius:50%;background:radial-gradient(ellipse,rgba(201,152,60,.1),transparent 65%);pointer-events:none}
+.cinner{position:relative;z-index:1;max-width:600px;margin:0 auto}
+.cinner .eye{justify-content:center}
+.contato h2{font-family:'Cormorant Garamond',serif;color:var(--white);font-size:clamp(2rem,3.8vw,3.1rem);font-weight:600;line-height:1.1;margin-bottom:1.2rem;letter-spacing:-.01em}
+.clead{color:rgba(255,255,255,.52);line-height:1.82;font-size:.97rem;margin-bottom:3rem;font-weight:300}
+.cbtns{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-bottom:4rem}
+.bw{display:inline-flex;align-items:center;gap:.65rem;background:#25D366;color:var(--white);padding:.95rem 2.1rem;border-radius:var(--r);font-size:.8rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;transition:all .3s var(--ease);box-shadow:0 6px 28px rgba(37,211,102,.25)}
+.bw:hover{background:#1fc45c;transform:translateY(-2px);box-shadow:0 16px 48px rgba(37,211,102,.35)}
+.be{display:inline-flex;align-items:center;gap:.65rem;border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.7);padding:.95rem 2.1rem;border-radius:var(--r);font-size:.8rem;font-weight:300;letter-spacing:.07em;text-transform:uppercase;transition:all .3s var(--ease)}
+.be:hover{border-color:var(--gold-bd);color:var(--gold-hi)}
+.cinfo{display:flex;border:1px solid rgba(255,255,255,.07);border-radius:var(--rx);background:rgba(255,255,255,.03);overflow:hidden;flex-wrap:wrap}
+.ci{flex:1;min-width:150px;padding:1.5rem 1.8rem;border-right:1px solid rgba(255,255,255,.07);text-align:center}
+.ci:last-child{border-right:none}
+.ci-ico{font-size:1.1rem;margin-bottom:.45rem;opacity:.55}
+.ci-lbl{font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:.3rem;display:block}
+.ci-val{font-size:.84rem;color:rgba(255,255,255,.72);font-weight:300;line-height:1.5}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   FOOTER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+footer{background:#03080f;padding:1.6rem 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;border-top:1px solid rgba(255,255,255,.05)}
+.flogo{font-family:'Cormorant Garamond',serif;color:rgba(255,255,255,.38);font-size:.95rem}
+.flogo span{color:var(--gold);opacity:.65}
+.fcopy{font-size:.72rem;color:rgba(255,255,255,.22);letter-spacing:.03em}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   RESPONSIVE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@media(max-width:1024px){.agrid{grid-template-columns:repeat(2,1fr)}.dgrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){
+  nav ul{display:none}.ham{display:flex}
+  .hero{grid-template-columns:1fr;min-height:auto}
+  .hr{height:55vw;display:block}
+  .hphoto{position:absolute}
+  .hcard{display:none}
+  .hbracket{display:none}
+  .hl{padding:100px 5% 60px}
+  .hl::after{display:none}
+  .hero h1{font-size:2.3rem}
+  .hstats{gap:2rem;flex-wrap:wrap}
+  section{padding:5rem 5%}
+  .about{grid-template-columns:1fr;gap:4rem}
+  .avis{padding:0 0 32px}
+  .agrid{grid-template-columns:1fr}.dgrid{grid-template-columns:1fr}
+  .cbtns{flex-direction:column;align-items:center}
+  .cinfo{flex-direction:column}.ci{border-right:none;border-bottom:1px solid rgba(255,255,255,.07)}.ci:last-child{border-bottom:none}
+  .trust{flex-direction:column;align-items:flex-start;padding:1rem 5%}
+  .ti{border-right:none;border-bottom:1px solid var(--cream2);width:100%;padding:1rem 0}
+  .ti:last-child{border-bottom:none}
+  footer{flex-direction:column;text-align:center}
+}
+@media(max-width:480px){.hero h1{font-size:2rem}.ctas{flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+<body>
+
+<div id="prog"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="logo">Mendes <em>&</em> Associados</div>
+  <ul>
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#areas">Áreas</a></li>
+    <li><a href="#depoimentos">Depoimentos</a></li>
+    <li><a href="#contato" class="ncta">Consulta gratuita</a></li>
+  </ul>
+  <div class="ham" id="ham" onclick="toggleNav()"><span></span><span></span><span></span></div>
+</nav>
+<div class="mob" id="mob">
+  <a href="#sobre" onclick="closeNav()">Sobre</a>
+  <a href="#areas" onclick="closeNav()">Áreas</a>
+  <a href="#depoimentos" onclick="closeNav()">Depoimentos</a>
+  <a href="#contato" onclick="closeNav()">Consulta gratuita →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <!-- Left -->
+  <div class="hl">
+    <div class="hcopy">
+      <div class="pill"><span class="pdot"></span>Advocacia Trabalhista</div>
+      <h1>Seus direitos trabalhistas <i>defendidos</i> com experiência</h1>
+      <p class="hlead">Demissão sem justa causa, horas extras não pagas, assédio moral no trabalho. Se você foi lesado, posso te ajudar a recuperar o que é seu por direito.</p>
+      <div class="ctas">
+        <a href="#contato" class="btng">Consulta gratuita →</a>
+        <a href="#areas" class="btnl">Ver atuação</a>
+      </div>
+      <div class="hstats">
+        <div><span class="hs-num" data-target="800" data-prefix="+">+800</span><span class="hs-lbl">Casos resolvidos</span></div>
+        <div><span class="hs-num" data-target="14">14</span><span class="hs-lbl">Anos de experiência</span></div>
+        <div><span class="hs-num" data-target="97" data-suffix="%">97%</span><span class="hs-lbl">Taxa de sucesso</span></div>
+      </div>
+    </div>
+  </div>
+  <!-- Right — Photo -->
+  <div class="hr">
+    <div class="hphoto" id="hphoto"></div>
+    <!-- Cinematic overlays built into .hphoto::before/after -->
+    <!-- Bracket corners -->
+    <div class="hbracket hbl"></div>
+    <div class="hbracket hbr"></div>
+    <!-- Floating glass cards -->
+    <div class="hcard hc1">
+      <span class="hcard-lbl">Casos resolvidos</span>
+      <span class="hcard-val">+800</span>
+      <span class="hcard-sub">trabalhadores atendidos</span>
+    </div>
+    <div class="hcard hc2">
+      <span class="hcard-lbl">Taxa de sucesso</span>
+      <span class="hcard-val">97%</span>
+      <span class="hcard-sub">nos processos trabalhistas</span>
+    </div>
+    <div class="hcard hc3">
+      <span class="hcard-lbl">Experiência</span>
+      <span class="hcard-val">14</span>
+      <span class="hcard-sub">anos de atuação</span>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust">
+  <div class="ti r"><span class="tic">⚖️</span> OAB/PR nº 45.231</div>
+  <div class="ti r d1"><span class="tic">🎓</span> Pós-graduado em Direito do Trabalho</div>
+  <div class="ti r d2"><span class="tic">📍</span> Maringá e Norte do Paraná</div>
+  <div class="ti r d3"><span class="tic">🔒</span> 1ª consulta 100% gratuita</div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="sobre">
+  <div class="avis r">
+    <div class="adots"></div>
+    <div class="aframe"></div>
+    <div class="aimg">
+      <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?w=700&q=88" alt="Dr. Carlos Mendes" loading="lazy">
+      <div class="aimg-name">
+        <strong>Dr. Carlos Mendes</strong>
+        <span>Advogado Trabalhista · OAB/PR</span>
+      </div>
+    </div>
+    <div class="abadge"><strong>14</strong><span>anos</span></div>
+    <div class="aoab">
+      <span class="aoab-ico">⚖️</span>
+      <div class="aoab-txt">
+        <strong>OAB/PR nº 45.231</strong>
+        <span>Registro ativo</span>
+      </div>
+    </div>
+  </div>
+  <div class="acopy">
+    <span class="eye r">Sobre o advogado</span>
+    <h2 class="shtitle r d1">Dr. Carlos Mendes</h2>
+    <div class="abar r d1"></div>
+    <p class="r d2">Advogado especialista em Direito do Trabalho com 14 anos de atuação, formado pela Universidade Estadual de Maringá e pós-graduado em Direito e Processo do Trabalho.</p>
+    <p class="r d2">Já representei mais de 800 trabalhadores em ações trabalhistas, auxiliando pessoas comuns a recuperar o que conquistaram com esforço — salários atrasados, verbas rescisórias, horas extras e indenizações por assédio.</p>
+    <p class="r d3">Minha atuação é pautada pela clareza: você saberá exatamente onde está o seu processo a cada etapa.</p>
+    <ul class="alist r d4">
+      <li>14 anos de experiência em Direito Trabalhista</li>
+      <li>Mais de 800 clientes atendidos com sucesso</li>
+      <li>97% de taxa de êxito nos processos</li>
+      <li>Transparência total do início ao fim</li>
+    </ul>
+  </div>
+</section>
+
+<!-- AREAS -->
+<section class="areas" id="areas">
+  <div class="ahd">
+    <span class="eye r">Áreas de atuação</span>
+    <h2 class="shtitle r d1">Como posso te ajudar</h2>
+    <p class="r d2">Atuo em toda a região de Maringá e Norte do Paraná</p>
+  </div>
+  <div class="agrid">
+    <div class="ac r"><span class="acnum">01</span><div class="acico">📋</div><h3>Rescisão e demissão</h3><p>Demissão sem justa causa, rescisão indireta, verbas rescisórias não pagas, FGTS e seguro-desemprego.</p></div>
+    <div class="ac r d1"><span class="acnum">02</span><div class="acico">⏱️</div><h3>Horas extras e adicionais</h3><p>Horas extras não pagas, adicional noturno, insalubridade, periculosidade e intervalos suprimidos.</p></div>
+    <div class="ac r d2"><span class="acnum">03</span><div class="acico">🛡️</div><h3>Assédio moral e acidente</h3><p>Assédio moral no trabalho, doenças ocupacionais, acidentes de trabalho e indenizações por danos.</p></div>
+    <div class="ac r d3"><span class="acnum">04</span><div class="acico">📑</div><h3>Reconhecimento de vínculo</h3><p>Trabalho sem carteira assinada, pejotização irregular e reconhecimento de relação de emprego.</p></div>
+    <div class="ac r d4"><span class="acnum">05</span><div class="acico">💼</div><h3>Negociações e acordos</h3><p>Homologação de rescisão, conciliação prévia e negociações coletivas com empresas e sindicatos.</p></div>
+    <div class="ac r d5"><span class="acnum">06</span><div class="acico">⚖️</div><h3>Ações na Justiça do Trabalho</h3><p>Representação completa nas varas do trabalho, do ajuizamento ao trânsito em julgado.</p></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="depo" id="depoimentos">
+  <div class="dhd">
+    <span class="eye r">Depoimentos</span>
+    <h2 class="shtitle r d1">O que dizem os clientes</h2>
+    <p class="r d2">Histórias reais de trabalhadores que recuperaram seus direitos</p>
+  </div>
+  <div class="dgrid">
+    <div class="dc r">
+      <div class="stars"><div class="st"></div><div class="st"></div><div class="st"></div><div class="st"></div><div class="st"></div></div>
+      <p class="dtxt">"Fui demitido sem receber nada do que era meu por direito. O Dr. Carlos resolveu meu caso em poucos meses. Recuperei o FGTS, as horas extras e ainda recebi indenização. Recomendo muito."</p>
+      <div class="daut"><div class="ava">MR</div><div><span class="aname">Marcos Rodrigues</span><span class="arole">Operador industrial — Maringá/PR</span></div></div>
+    </div>
+    <div class="dc r d1">
+      <div class="stars"><div class="st"></div><div class="st"></div><div class="st"></div><div class="st"></div><div class="st"></div></div>
+      <p class="dtxt">"Trabalhei 6 anos sem carteira assinada. Achei que não tinha jeito. O Dr. Carlos conseguiu reconhecer meu vínculo e recebi tudo que era meu. Atendimento transparente do início ao fim."</p>
+      <div class="daut"><div class="ava">JF</div><div><span class="aname">Juliana Ferreira</span><span class="arole">Assistente administrativa — Sarandi/PR</span></div></div>
+    </div>
+    <div class="dc r d2">
+      <div class="stars"><div class="st"></div><div class="st"></div><div class="st"></div><div class="st"></div><div class="st"></div></div>
+      <p class="dtxt">"Sofri assédio moral por anos e não sabia que tinha direito a indenização. O Dr. Carlos me explicou tudo com clareza e lutou pelo meu caso. Resultado muito além do esperado."</p>
+      <div class="daut"><div class="ava">AP</div><div><span class="aname">Ana Paula Santos</span><span class="arole">Enfermeira — Paiçandu/PR</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contato" id="contato">
+  <div class="cglow"></div>
+  <div class="cinner">
+    <span class="eye r">Contato</span>
+    <h2 class="r d1">Fale agora,<br>sem compromisso</h2>
+    <p class="clead r d2">A primeira consulta é gratuita. Me conta o que aconteceu e avalio o seu caso com honestidade.</p>
+    <div class="cbtns r d3">
+      <a href="https://wa.me/5544999999999" class="bw">💬 &nbsp;WhatsApp — (44) 99999-9999</a>
+      <a href="mailto:contato@carlosmendesadv.com.br" class="be">✉️ &nbsp;contato@carlosmendesadv.com.br</a>
+    </div>
+    <div class="cinfo r d4">
+      <div class="ci"><div class="ci-ico">📍</div><span class="ci-lbl">Endereço</span><span class="ci-val">Av. Colombo, 1234 — sala 8<br>Maringá/PR</span></div>
+      <div class="ci"><div class="ci-ico">🕐</div><span class="ci-lbl">Horário</span><span class="ci-val">Segunda a Sexta<br>08h às 18h</span></div>
+      <div class="ci"><div class="ci-ico">⚖️</div><span class="ci-lbl">Registro</span><span class="ci-val">OAB/PR nº 45.231</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="flogo">Mendes <span>&</span> Associados</div>
+  <div class="fcopy">© 2025 Mendes & Associados — Advocacia Trabalhista. OAB/PR nº 45.231</div>
+</footer>
+
+<script>
+// Progress bar
+window.addEventListener('scroll',function(){
+  var d=document.documentElement,b=document.body;
+  var t=d.scrollTop||b.scrollTop,h=d.scrollHeight-d.clientHeight;
+  document.getElementById('prog').style.width=(t/h*100)+'%';
+  document.getElementById('nav').classList.toggle('on',window.scrollY>40);
+},{passive:true});
+
+// Mobile nav
+function toggleNav(){
+  document.getElementById('mob').classList.toggle('on');
+  document.getElementById('ham').classList.toggle('x');
+}
+function closeNav(){
+  document.getElementById('mob').classList.remove('on');
+  document.getElementById('ham').classList.remove('x');
+}
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click',function(e){
+    var t=document.querySelector(this.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});closeNav()}
+  });
+});
+
+// Reveal on scroll
+var io=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('v');io.unobserve(e.target)}});
+},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.r').forEach(function(el){io.observe(el)});
+
+// Animated counters
+var counted=false;
+var cio=new IntersectionObserver(function(entries){
+  if(!entries[0].isIntersecting||counted)return;
+  counted=true;
+  document.querySelectorAll('[data-target]').forEach(function(el){
+    var target=+el.dataset.target,pre=el.dataset.prefix||'',suf=el.dataset.suffix||'',dur=1500,start=null;
+    (function step(ts){
+      if(!start)start=ts;
+      var p=Math.min((ts-start)/dur,1),ease=1-Math.pow(1-p,3);
+      el.textContent=pre+Math.round(ease*target)+suf;
+      if(p<1)requestAnimationFrame(step);
+    })(performance.now());
+  });
+},{threshold:.5});
+var hs=document.querySelector('.hstats');
+if(hs)cio.observe(hs);
+
+// Photo zoom-out on load
+window.addEventListener('load',function(){
+  var p=document.getElementById('hphoto');
+  if(p)p.classList.add('loaded');
+});
+</script>
+</body>
+</html>
